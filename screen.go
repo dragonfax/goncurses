@@ -72,3 +72,7 @@ func (s *Screen) End() {
 	s.Set()
 	End()
 }
+
+func (s *Screen) Cbreak() {
+	C.cbreak_sp(s.scrPtr)
+}

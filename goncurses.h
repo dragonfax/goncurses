@@ -9,6 +9,7 @@ bool is_term_resized(int y, int x);
 int resizeterm(int y, int x);
 #endif
 
+WINDOW * ncurses_stdscr();
 int ncurses_COLOR_PAIR(int p);
 chtype ncurses_getbkgd(WINDOW *win);
 void ncurses_getbegyx(WINDOW *win, int *y, int *x);

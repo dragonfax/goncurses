@@ -247,7 +247,7 @@ func StartColor() error {
 // the physical screen. This is the same Window returned by Init and therefore
 // not useful unless using NewTerm and other multi-screen related functions.
 func StdScr() *Window {
-	return &Window{C.stdscr()}
+	return &Window{C.ncurses_stdscr()}
 }
 
 // UnGetChar places the character back into the input queue
