@@ -4,6 +4,7 @@
 
 package goncurses
 
+// #cgo pkg-config: ncurses
 // #include <stdlib.h>
 // #include <curses.h>
 // #include "goncurses.h"
@@ -24,6 +25,14 @@ func NewWindow(h, w, y, x int) (window *Window, err error) {
 	window = &Window{C.newwin(C.int(h), C.int(w), C.int(y), C.int(x))}
 	if window.win == nil {
 		err = errors.New("Failed to create a new window")
+	}
+	return
+}
+
+func NewWindowSP(screen *Screen, h, w, y, x int) (window *Window, err error) {
+	window = &Window{C.newwin_sp(screen.scrPtr, C.int(h), C.int(w), C.int(y), C.int(x))}
+	if window.win == nil {
+		err = errors.New("Failed to create a new window from a screen")
 	}
 	return
 }
