@@ -157,17 +157,6 @@ func InitColor(col, r, g, b int16) error {
 	return nil
 }
 
-// InitPair sets a colour pair designated by 'pair' to fg and bg colors
-func InitPair(pair, fg, bg int16) error {
-	if pair <= 0 || C.int(pair) > C.int(C.COLOR_PAIRS-1) {
-		return errors.New("Color pair out of range")
-	}
-	if C.init_pair(C.short(pair), C.short(fg), C.short(bg)) == C.ERR {
-		return errors.New("Failed to init color pair")
-	}
-	return nil
-}
-
 // Initialize the ncurses library. You must run this function prior to any
 // other goncurses function in order for the library to work
 func Init() (stdscr *Window, err error) {
@@ -258,7 +247,7 @@ func StartColor() error {
 // the physical screen. This is the same Window returned by Init and therefore
 // not useful unless using NewTerm and other multi-screen related functions.
 func StdScr() *Window {
-	return &Window{C.stdscr}
+	return &Window{C.ncurses_stdscr()}
 }
 
 // UnGetChar places the character back into the input queue

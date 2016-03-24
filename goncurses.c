@@ -40,6 +40,10 @@ WINDOW *ncurses_wgetparent(const WINDOW *win) {
 #endif
 }
 
+WINDOW *ncurses_stdscr() {
+  return stdscr;
+}
+
 bool ncurses_is_cleared(const WINDOW *win) {
 #ifdef PDCURSES
 	return win->_clear;
