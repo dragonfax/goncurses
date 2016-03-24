@@ -39,14 +39,22 @@ func NewWindowSP(screen *Screen, h, w, y, x int) (window *Window, err error) {
 
 // AddChar prints a single character to the window. The character can be
 // OR'd together with attributes and colors.
-func (w *Window) AddChar(ach Char) {
-	C.waddch(w.win, C.chtype(ach))
+func (w *Window) AddChar(ach Char) error {
+	err := C.waddch(w.win, C.chtype(ach))
+	if err == C.ERR {
+		return errors.New("failed to add character")
+	}
+	return nil
 }
 
 // MoveAddChar prints a single character to the window at the specified
 // y x coordinates. See AddChar for more info.
-func (w *Window) MoveAddChar(y, x int, ach Char) {
-	C.mvwaddch(w.win, C.int(y), C.int(x), C.chtype(ach))
+func (w *Window) MoveAddChar(y, x int, ach Char) error {
+	err := C.mvwaddch(w.win, C.int(y), C.int(x), C.chtype(ach))
+	if err == C.ERR {
+		return errors.New("failed to  move and add character")
+	}
+	return nil
 }
 
 // Turn off character attribute.

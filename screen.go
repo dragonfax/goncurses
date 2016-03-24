@@ -76,3 +76,7 @@ func (s *Screen) End() {
 func (s *Screen) Cbreak() {
 	C.cbreak_sp(s.scrPtr)
 }
+
+func (s *Screen) Endwin() {
+	C.endwin_sp(s.scrPtr)
+}
